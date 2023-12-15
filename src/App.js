@@ -1,5 +1,7 @@
-import React, { useState, useCallback } from "react";
-import { useSelector } from "react-redux";
+import React, { useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { counterActions } from "./store/counter-slice";
 
 import Counter from "./components/Counter";
 import CounterButton from "./components/CounterButton";
@@ -7,26 +9,22 @@ import SetCounter from "./components/SetCounter";
 
 function App() {
   const counter = useSelector((state) => state.counter);
-  // const [count, setCount] = useState(0);
+  const dispatch = useDispatch();
 
-  // const handleIncrement = useCallback(() => {
-  //   setCount((prev) => prev + 1);
-  // }, []);
+  const handleIncrement = useCallback(() => {
+    dispatch(counterActions.increase());
+  }, [dispatch]);
 
-  // const handleDecrement = useCallback(() => {
-  //   setCount((prev) => prev - 1);
-  // }, []);
-
-  // const handleSetCount = (newCount) => {
-  //   setCount(newCount);
-  // };
+  const handleDecrement = useCallback(() => {
+    dispatch(counterActions.decrease());
+  }, [dispatch]);
 
   return (
     <div>
       <Counter counter={counter} />
-      {/* <CounterButton onButtonClick={handleIncrement}>Increase</CounterButton>
+      <CounterButton onButtonClick={handleIncrement}>Increase</CounterButton>
       <CounterButton onButtonClick={handleDecrement}>Decrease</CounterButton>
-      <SetCounter onSet={handleSetCount} /> */}
+      <SetCounter />
     </div>
   );
 }

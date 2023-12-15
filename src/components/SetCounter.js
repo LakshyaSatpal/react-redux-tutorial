@@ -1,10 +1,17 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { counterActions } from "../store/counter-slice";
 
-const SetCounter = ({ onSet }) => {
+const SetCounter = () => {
+  const dispatch = useDispatch();
   const [enteredCount, setEnteredCount] = useState(0);
 
   const handleEnteredCountChange = (event) => {
     setEnteredCount(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    dispatch(counterActions.set(enteredCount));
   };
 
   return (
@@ -14,7 +21,7 @@ const SetCounter = ({ onSet }) => {
         value={enteredCount}
         onChange={handleEnteredCountChange}
       />
-      <button onClick={() => onSet(enteredCount)}>Set</button>
+      <button onClick={handleSubmit}>Set</button>
     </div>
   );
 };

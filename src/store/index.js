@@ -1,13 +1,6 @@
-import { createSlice, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 
-const counterSlice = createSlice({
-  name: "counter",
-  initialState: { counter: 0 },
-  reducers: {
-    increase() {},
-    decrease() {},
-  },
-});
+import counterSlice from "./counter-slice";
 
 const store = configureStore({
   reducer: counterSlice.reducer,
